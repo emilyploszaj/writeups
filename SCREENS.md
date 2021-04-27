@@ -124,11 +124,11 @@ public class ProcessorScreen extends HandledScreen<ProcessorScreenHandler> {
     }
 
     @Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-		this.renderBackground(matrices);
-		super.render(matrices, mouseX, mouseY, delta);
-		this.drawMouseoverTooltip(matrices, mouseX, mouseY);
-	}
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        super.render(matrices, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+    }
 
     @Override
     public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
@@ -137,8 +137,8 @@ public class ProcessorScreen extends HandledScreen<ProcessorScreenHandler> {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         RenderSystem.setShaderTexture(0, BACKGROUND);
-		int x = (this.width - this.backgroundWidth) / 2;
-		int y = (this.height - this.backgroundHeight) / 2;
+        int x = (this.width - this.backgroundWidth) / 2;
+        int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, this.backgroundWidth, this.backgroundHeight);
         PropertyDelegate delegate = this.handler.propertyDelegate;
         int progress = delegate.get(0) * 24 / delegate.get(1);
@@ -161,13 +161,13 @@ public class ExampleModScreenHandlers {
     // Note that this is a using the "simple" screen handler registry
     // Some screen handlers might want to send a bit of arbitrary info on creation
     // They would use the `registerExtended` method
-	public static <T extends ScreenHandler> ScreenHandlerType<T> register(String name, BiFunction<Integer, PlayerInventory, T> supplier) {
-		return ScreenHandlerRegistry.registerSimple(new Identifier("example", name), new ScreenHandlerRegistry.SimpleClientHandlerFactory<T>() {
-				public T create(int syncId, PlayerInventory inventory) {
-					return supplier.apply(syncId, inventory);
-				}
-		});
-	}
+    public static <T extends ScreenHandler> ScreenHandlerType<T> register(String name, BiFunction<Integer, PlayerInventory, T> supplier) {
+        return ScreenHandlerRegistry.registerSimple(new Identifier("example", name), new ScreenHandlerRegistry.SimpleClientHandlerFactory<T>() {
+                public T create(int syncId, PlayerInventory inventory) {
+                    return supplier.apply(syncId, inventory);
+                }
+        });
+    }
 }
 ```
 
